@@ -67,6 +67,12 @@ image sprite kiry = "Kiry.png"
 image Roxy_primer_imagen = "Roxy_muestra1.png"
 image Roxy_rechazo = "Roxy_muestra2.png"
 
+#imagenes escenas
+image Vista_cocina = "madre_cocina1.png"
+image Vista_cocina2 = "madre_cocina2.png"
+image Vista_cocina3 = "madre_cocina3.png"
+image Vista_cocina4 = "madre_cocina4.png"
+image Vista_cocina5 = "madre_cocina5.png"
 
 # 8. Inicio del juego
 label start:
@@ -96,7 +102,7 @@ label start:
 
     scene bg tormenta with dissolve
     
-    narrador "La nieve cubre todo. Llevamos días sin poder salir. El frío empieza a colarse por las ventanas."
+    narrador "La nieve cubre todo. Llevamos días sin poder salir. tienen suerte de tener calefacción y luz gubernamental ."
     narrador "La radio dijo que esto podría durar meses. Por suerte, hay mucha comida enlatada abajo."
     
     mc "Tres meses encerrados... esto se va a volver una locura."
@@ -173,22 +179,27 @@ label loc_cocina:
     if momento_dia == "Mañana" and not evento_madre_cocina_visto:
         $ evento_madre_cocina_visto = True
         narrador "[madre_name] está sacando unas latas de los estantes inferiores."
-        show sprite mom at right, zoom_sprite
+        show Vista_cocina at fullscreen with flash
         
-        narrador "Lleva unos pantalones de pijama ajustados. Al agacharse, la vista es muy clara."
+        narrador "Tu madre lleva un vestido de tirantes rojos, sin que se de cuenta el vestido esta alzado mostrando su trasero  "
+        mc "no puede ser se le ve el trasero"
+        show Vista_cocina2 at fullscreen with flash
         
         menu:
             "Quedarte mirando descaradamente.":
                 $ tension_madre += 3
                 narrador "No puedes evitar mirar. Ella se da cuenta al darse la vuelta, pero no se cubre."
+                show Vista_cocina3 at fullscreen with flash
                 madre "¿Te gusta la vista, [mc_name]?"
                 mc "Es... difícil no mirar."
                 madre "Cuidado con lo que miras, podrías quemarte. Ayúdame con esto mejor."
+                show Vista_cocina4 at fullscreen with flash
                 # [Aquí puedes agregar diálogo más fuerte o contacto físico]
                 
             "Ofrecerle ayuda.":
                 $ amor_madre += 2
                 mc "Déjame ayudarte con eso."
+                show Vista_cocina5 at fullscreen with flash
                 madre "Gracias, hijo. Eres un caballero."
                 
             "Ignorarla y servirte café.":
