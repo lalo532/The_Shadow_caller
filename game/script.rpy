@@ -67,12 +67,17 @@ image sprite kiry = "Kiry.png"
 image Roxy_primer_imagen = "Roxy_muestra1.png"
 image Roxy_rechazo = "Roxy_muestra2.png"
 
-#imagenes escenas
+# Imágenes escenas
 image Vista_cocina = "madre_cocina1.png"
 image Vista_cocina2 = "madre_cocina2.png"
 image Vista_cocina3 = "madre_cocina3.png"
 image Vista_cocina4 = "madre_cocina4.png"
 image Vista_cocina5 = "madre_cocina5.png"
+
+image roxy_baño0 = "roxy_baño1.png"
+image roxy_baño1 = "roxy_baño2.png"
+image roxy_baño2 = "roxy_baño3.png"
+image roxy_baño3 = "roxy_baño4.png"
 
 # 8. Inicio del juego
 label start:
@@ -102,7 +107,7 @@ label start:
 
     scene bg tormenta with dissolve
     
-    narrador "La nieve cubre todo. Llevamos días sin poder salir. tienen suerte de tener calefacción y luz gubernamental ."
+    narrador "La nieve cubre todo. Llevamos días sin poder salir. Tienen suerte de tener calefacción y luz gubernamental."
     narrador "La radio dijo que esto podría durar meses. Por suerte, hay mucha comida enlatada abajo."
     
     mc "Tres meses encerrados... esto se va a volver una locura."
@@ -159,7 +164,6 @@ label loc_sala:
                 $ amor_roxane += 1
                 $ tension_roxane += 2
                 narrador "Te sientas a su lado. Su pierna roza la tuya bajo la manta."
-                # [Aquí puedes expandir tu escena]
                 
             "Dejarla sola":
                 mc "Solo iba por agua. Ya me voy."
@@ -181,32 +185,31 @@ label loc_cocina:
         narrador "[madre_name] está sacando unas latas de los estantes inferiores."
         show Vista_cocina at fullscreen with flash
         
-        narrador "Tu madre lleva un vestido de tirantes rojos, sin que se de cuenta el vestido esta alzado mostrando su trasero  "
-        mc "no puede ser se le ve el trasero"
+        narrador "Tu madre lleva un vestido de tirantes rojos. Sin darse cuenta, la tela se ha subido, exponiendo sus muslos y su trasero."
+        mc "Mierda... menuda vista."
         show Vista_cocina2 at fullscreen with flash
         
         menu:
             "Quedarte mirando descaradamente.":
                 $ tension_madre += 3
-                narrador "No puedes evitar mirar. Ella se da cuenta al darse la vuelta, pero no se cubre."
+                narrador "No intentas disimular. La recorres con la mirada hasta que ella se da cuenta al voltear."
                 show Vista_cocina3 at fullscreen with flash
                 madre "¿Te gusta la vista, [mc_name]?"
-                mc "Es... difícil no mirar."
-                madre "Cuidado con lo que miras, podrías quemarte. Ayúdame con esto mejor."
+                mc "Si te pones así, es imposible mirar a otro lado."
+                madre "Eres un descarado... pero me gusta que prestes atención."
                 show Vista_cocina4 at fullscreen with flash
-                # [Aquí puedes agregar diálogo más fuerte o contacto físico]
+                madre "Cuidado con acercarte mucho, podrías quemarte. Mejor ven y ayúdame con esto."
                 
             "Ofrecerle ayuda.":
                 $ amor_madre += 2
-                mc "Déjame ayudarte con eso."
+                mc "Déjame ayudarte con eso antes de que te caigas."
                 show Vista_cocina5 at fullscreen with flash
-                madre "Gracias, hijo. Eres un caballero."
+                madre "Gracias, hijo. Qué considerado eres."
                 
             "Ignorarla y servirte café.":
                 $ odio_madre += 1
-                narrador "Pasas de largo. Ella te mira de reojo, algo molesta por tu indiferencia."
+                narrador "Pasas de largo buscando tu taza. Ella se acomoda el vestido rápidamente, algo ofendida por tu frialdad."
                 
-        hide sprite mom
     else:
         narrador "No hay nadie en la cocina. El fregadero está limpio."
         
@@ -224,17 +227,29 @@ label loc_bano:
             "Entrar sin tocar.":
                 $ tension_madre += 2
                 $ amor_roxy += 3
-                show sprite roxy at right, zoom_sprite
+                show roxy_baño0 at fullscreen with flash
                 roxy "¡Oye! ¿No sabes tocar?"
-                mc "La puerta estaba abierta."
-                roxy "Cierra la boca y pásame la toalla. Ya que estás aquí..."
-                narrador "Roxy te mira con una sonrisa provocativa mientras el agua resbala por su cuerpo."
-                # [Aquí va tu escena]
-                hide sprite roxy
+                show roxy_baño1 at fullscreen with flash
+                mc "La puerta estaba abierta. Culpa tuya."
+                roxy "Cierra la boca y pásame la toalla. Ya que estás aquí de mirón..."
+                show roxy_baño2 at fullscreen with flash
+                narrador "Roxy te mira con una sonrisa muy provocativa mientras el agua resbala por sus curvas."
+                show roxy_baño3 at fullscreen with flash
+                roxy "Deja de verme el culo... parece que quieres comértelo."
                 
+                # CORRECCIÓN DE ERROR: Faltaban los dos puntos (:) al final de las opciones
+                menu:
+                    "Ese cuerpo está para eso y más, [roxy_name].":
+                        $ amor_roxy += 3
+                        roxy "Mmm... al menos eres honesto. Pásame esa toalla antes de que te quedes babeando."
+                        
+                    "Bájate de tu nube. Ni que fueras para tanto.":
+                        $ amor_roxy -= 2
+                        roxy "Idiota. Lárgate de aquí y cierra la puerta."
+
             "Cerrar la puerta e irte.":
                 $ odio_roxy += 1
-                narrador "Decides no buscar problemas y te vas en silencio."
+                narrador "Decides no buscar problemas hoy y te vas en silencio."
                 
     elif momento_dia == "Tarde" and not contenido_gay_activado:
         narrador "El baño está ocupado. Roxy está cantando desafinada bajo la ducha."
@@ -281,9 +296,7 @@ label avanzar_tiempo:
         kiry "¡Despierta, [mc_name]! Me aburro."
         mc "¿Qué quieres, enana?"
         kiry "No me digas enana. Tengo frío, hazme un espacio."
-        narrador "Se mete bajo tus sábanas antes de que puedas protestar."
+        narrador "Se mete bajo tus sábanas antes de que puedas protestar, pegando sus piernas a las tuyas."
         $ amor_kiry += 2
-        # [Escena matutina con Kiry]
-        hide sprite kiry
         
     jump hub_principal
