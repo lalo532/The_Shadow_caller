@@ -13,7 +13,7 @@
 ##
 ## El _() que rodea la cadena de texto la señala como traducible.
 
-define config.name = _("shadow_caller")
+define config.name = _("Winter´s Heat")
 
 
 ## Determina si el título dado más arriba se muestra en el menú principal.
@@ -24,7 +24,7 @@ define gui.show_name = True
 
 ## Versión del juego.
 
-define config.version = "1.0"
+define config.version = "ALPHA_V.0.1"
 
 
 ## Texto situado en la pantalla 'Acerca de' del juego. Sitúa el texto entre
@@ -37,7 +37,7 @@ define gui.about = _p("""
 ## Nombre breve del juego para ejecutables y directorios en la distribución.
 ## Debe contener solo carácteres ASCII, sin espacios, comas o puntos y coma.
 
-define build.name = "shadow_caller"
+define build.name = "Winter´s Heat"
 
 
 ## Sonidos y música ############################################################

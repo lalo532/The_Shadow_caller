@@ -26,7 +26,7 @@ define config.check_conflicting_properties = True
 ## Los colores del texto de la interfaz
 
 ## El color enfatizado usado en la interfaz para subrayar texto.
-define gui.accent_color = '#cc6600'
+define gui.accent_color = '#da00c7'
 
 ## El color del botón de texto cuando no está seleccionado ni enfocado.
 define gui.idle_color = '#707070'
@@ -35,8 +35,7 @@ define gui.idle_color = '#707070'
 define gui.idle_small_color = '#606060'
 
 ## El color usado en botones y barras que ganan foco.
-define gui.hover_color = '#cc6600'
-
+define gui.hover_color = '#da00c7'
 ## El color del botón de texto seleccionado pero no enfocado. Un botón está
 ## seleccionado si indica el valor actual de la pantalla o preferencia.
 define gui.selected_color = '#555555'
@@ -87,8 +86,8 @@ define gui.title_text_size = 75
 ## Menú principal y menús del juego ############################################
 
 ## Imágenes del menú principal y menús del juego.
-define gui.main_menu_background = "gui/main_menu.png"
-define gui.game_menu_background = "gui/game_menu.png"
+define gui.main_menu_background = Transform("gui/main_menu.png", size=(1920, 1080), align=(0.5, 0.5))
+define gui.game_menu_background = Transform("gui/main_menu.png", size=(1920, 1080), align=(0.5, 0.5))
 
 
 ## Diálogo #####################################################################
