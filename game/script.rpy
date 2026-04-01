@@ -153,9 +153,9 @@ label start:
             $ tipo_relacion = "familia"
             jump establecer_familia
 
-        "Somos Compañeros de piso / [mc_name]s":
-            $ tipo_relacion = "[mc_name]s"
-            jump establecer_[mc_name]s
+        "Somos Compañeros de piso / inquilinos":
+            $ tipo_relacion = "inquilinos"
+            jump establecer_inquilinos
 
 label establecer_familia:
     narrador "Entendido. Son familia. Ahora define el parentesco específico usando a [roxy_name] de ejemplo."
@@ -189,7 +189,7 @@ label establecer_familia:
 
     jump finalizar_configuracion
 
-label establecer_[mc_name]s:
+label establecer_inquilinos:
     narrador "Entendido. No son familia directa."
 
     # Definimos roles de no-familia
