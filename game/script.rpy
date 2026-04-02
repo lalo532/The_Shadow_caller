@@ -1,5 +1,5 @@
-# ==========================================
-# 1. Variables de nombres y RELACIONES (Actualizado)
+﻿# ==========================================
+# 1. Variables de nombres y RELACIONES
 # ==========================================
 default mc_name = "MC"
 
@@ -9,15 +9,14 @@ default roxy_name = "Roxy"
 default h_mayor_name = "Roxane"
 default h_menor_name = "Kiry"
 
-# VARIABLES DE ROL (Aquí se guardará si es hermana, prima, compañera, etc.)
-# Se usan en los diálogos como [roxy_rol], [madre_rol], etc.
+# VARIABLES DE ROL
 default madre_rol = "madre"
 default roxy_rol = "hermana"
 default roxane_rol = "hermana mayor"
 default kiry_rol = "hermana menor"
 
 # Variable de control interna
-default tipo_relacion = "familia" # Puede ser "familia" o "[mc_name]s"
+default tipo_relacion = "familia" 
 
 # ==========================================
 # 2. Declaración de personajes
@@ -70,6 +69,8 @@ default odio_kiry = 0
 default evento_madre_cocina_visto = False
 default evento_roxy_bano_visto = False
 default evento_playcartas_visto = False
+default evento_roxane_yoga_visto = False
+default evento_kiry_platica_visto = False
 
 # ==========================================
 # 7. Imágenes (Fondos y Sprites Base)
@@ -80,6 +81,11 @@ image bg cocina = "fondo_casa.png"
 image bg bano = "fondo_casa.png"
 image bg cuarto_mc = "fondo_casa.png"
 image bg tormenta = "fondo_casa.png"
+image bg pasillo_arriba = "pasillo_arriba.png"
+image bg cuarto_madre = "cuarto_madre.png"
+image bg cuarto_roxane = "cuarto_roxane.png"
+image bg cuarto_roxy = "cuarto_roxy.png"
+image bg cuarto_kiry = "cuarto_kiry.png"
 
 image sprite roxy = "Roxy.png"
 image sprite mom = "Madre.png"
@@ -100,6 +106,24 @@ image roxy_baño0 = "roxy_baño1.png"
 image roxy_baño1 = "roxy_baño2.png"
 image roxy_baño2 = "roxy_baño3.png"
 image roxy_baño3 = "roxy_baño4.png"
+
+# Imágenes de Escenas: Kiry Plática
+image kiri_platica1 = "kiri_platica1.png"
+image kiri_platica2 = "kiri_platica2.png"
+image kiri_platica3 = "kiri_platica3.png"
+image kiri_platica4 = "kiri_platica4.png"
+image kiri_platica5 = "kiri_platica5.png"
+image kiri_platica6 = "kiri_platica6.png"
+
+# Imágenes de Escenas: Roxane Yoga
+image roxane_yoga1 = "roxane_yoga1.png"
+image roxane_yoga2 = "roxane_yoga2.png"
+image roxane_yoga3 = "roxane_yoga3.png"
+image roxane_yoga4 = "roxane_yoga4.png"
+image roxane_yoga5 = "roxane_yoga5.png"
+image roxane_yoga6 = "roxane_yoga6.png"
+image roxane_yoga7 = "roxane_yoga7.png"
+image roxane_yoga8 = "roxane_yoga8.png"
 
 # Imágenes de Escenas: Cartas con Roxy
 image playcartas1 = "playcartas1.png"
@@ -132,18 +156,16 @@ image playcartas27 = "playcartas27.png"
 image playcartas28 = "playcartas28.png"
 
 # ==========================================
-# 8. Inicio del juego (Configuración de Relaciones)
+# 8. Inicio del juego (Configuración)
 # ==========================================
 label start:
 
-    # Input de nombres estándar
     $ mc_name = renpy.input("¿Cuál es tu nombre?").strip() or "MC"
     $ madre_name = renpy.input("¿Cómo se llama la dueña de casa/madre?").strip() or "Madre"
     $ roxy_name = renpy.input("¿Cómo se llama la chica trans (23 años)?").strip() or "Roxy"
     $ h_mayor_name = renpy.input("¿Cómo se llama la mujer mayor (29 años)?").strip() or "Roxane"
     $ h_menor_name = renpy.input("¿Cómo se llama la chica joven (20 años)?").strip() or "Kiry"
 
-    # --- NUEVO: SISTEMA DE SELECCIÓN DE RELACIÓN ---
     narrador "Antes de empezar, define tu relación con las personas que viven en la casa."
 
     menu:
@@ -158,53 +180,47 @@ label start:
             jump establecer_inquilinos
 
 label establecer_familia:
-    narrador "Entendido. Son familia. Ahora define el parentesco específico usando a [roxy_name] de ejemplo."
+    narrador "Entendido. Son familia. Ahora define el parentesco específico usando a [h_menor_name] de ejemplo."
 
     menu:
-        "En este script, [roxy_name] es tu...?"
+        "En este script, [h_menor_name] es tu...?"
 
         "Hermana (Viven con su madre)":
-            # Configuración por defecto, pero la aseguramos
             $ madre_rol = "madre"
             $ roxy_rol = "hermana"
             $ roxane_rol = "hermana mayor"
             $ kiry_rol = "hermana menor"
-            narrador "Vives con tu [madre_rol] y tus [roxy_rol]s."
+            narrador "Vives con tu [madre_rol] y tus hermanas."
 
         "Prima (Viven con su tía)":
-            # Cambiamos los roles lógicamente
             $ madre_rol = "tía"
             $ roxy_rol = "prima"
             $ roxane_rol = "prima mayor"
             $ kiry_rol = "prima menor"
-            narrador "Vives con tu [madre_rol] y tus [roxy_rol]s."
+            narrador "Vives con tu [madre_rol] y tus primas."
 
-        "Tía joven (Vives con tu abuela - Roxy es hija de tu abuela)":
-            # Una configuración más compleja
+        "Tía joven (Vives con tu abuela)":
             $ madre_rol = "abuela"
             $ roxy_rol = "tía"
             $ roxane_rol = "tía mayor"
             $ kiry_rol = "tía menor"
-            narrador "Vives con tu [madre_rol] y tus [roxy_rol]s jóvenes."
+            narrador "Vives con tu [madre_rol] y tus tías jóvenes."
 
     jump finalizar_configuracion
 
 label establecer_inquilinos:
     narrador "Entendido. No son familia directa."
 
-    # Definimos roles de no-familia
     $ madre_rol = "casera"
     $ roxy_rol = "compañera"
     $ roxane_rol = "compañera de piso"
     $ kiry_rol = "compañera de cuarto"
     
-    # CORRECCIÓN AQUÍ: Usamos [madre_rol] y ajustamos la 's' al final
-    narrador "Vives alquilado con tu [madre_rol] y tus [roxy_rol]s."
+    narrador "Vives alquilado con tu [madre_rol] y tus [kiry_rol]s."
 
     jump finalizar_configuracion
     
 label finalizar_configuracion:
-    # --- FIN DEL SISTEMA DE RELACIONES ---
 
     menu:
         "Este juego contiene temas para adultos. ¿Aceptarías contenido GAY con [roxy_name] (siendo tu [roxy_rol])?"
@@ -231,7 +247,6 @@ label finalizar_configuracion:
     mc "Tres meses encerrados... esto se va a volver una locura."
 
     show sprite mom at right, zoom_sprite with easeinright
-    # DIÁLOGO ACTUALIZADO: Usamos variables de nombre y rol
     madre "Tranquilo, [mc_name]. Todo va a estar bien mientras no nos matemos entre nosotros."
     madre "Voy a organizar la comida. Busca algo que hacer."
 
@@ -240,34 +255,128 @@ label finalizar_configuracion:
     jump hub_principal
 
 # ==========================================
-# 9. El "Hub" o Pasillo Central
+# 9. El "Hub" o Pasillos
 # ==========================================
 label hub_principal:
     scene bg pasillo with dissolve
-    narrador "Estás en el pasillo de la cabaña."
+    narrador "Estás en el pasillo principal de la planta baja."
 
     menu:
         "¿A dónde quieres ir?"
 
+        "Planta Baja (Sala, Cocina, Baño)":
+            jump menu_planta_baja
+            
+        "Planta Alta (Habitaciones)":
+            jump menu_planta_alta
+            
+        "Avanzar el tiempo":
+            jump avanzar_tiempo
+
+label menu_planta_baja:
+    menu:
         "Ir a la Sala":
             jump loc_sala
         "Ir a la Cocina":
             jump loc_cocina
         "Ir al Baño":
             jump loc_bano
-        "Ir a tu Cuarto":
+        "Volver":
+            jump hub_principal
+
+label menu_planta_alta:
+    scene bg pasillo_arriba with dissolve
+    narrador "El pasillo de arriba es más estrecho. Aquí están todas las habitaciones."
+    
+    menu:
+        "Tu Cuarto ([mc_name])":
             jump loc_cuarto_mc
-        "Avanzar el tiempo":
+        "Cuarto de [madre_name] ([madre_rol])":
+            jump loc_cuarto_madre
+        "Cuarto de [h_mayor_name] ([roxane_rol])":
+            jump loc_cuarto_roxane
+        "Cuarto de [roxy_name] ([roxy_rol])":
+            jump loc_cuarto_roxy
+        "Cuarto de [h_menor_name] ([kiry_rol])":
+            jump loc_cuarto_kiry
+        "Bajar las escaleras":
+            jump hub_principal
+
+# ==========================================
+# 10. Locaciones y Eventos 
+# ==========================================
+# --- CUARTOS ---
+label loc_cuarto_madre:
+    scene bg cuarto_madre
+    if momento_dia == "Noche":
+        narrador "La puerta está entreabierta. [madre_name] está sentada en su cama aplicándose crema en las piernas."
+        show sprite mom at right, zoom_sprite
+        madre "¿Necesitas algo antes de dormir, [mc_name]?"
+        mc "Solo pasaba a ver si todo estaba en orden."
+        madre "Todo bien. Aunque esta cama se siente demasiado grande para una sola persona con este frío..."
+    else:
+        narrador "El cuarto de tu [madre_rol] está impecable y huele a su perfume."
+    jump menu_planta_alta
+
+label loc_cuarto_roxane:
+    scene bg cuarto_roxane
+    if momento_dia == "Tarde":
+        show sprite roxane at right, zoom_sprite
+        roxane "Si vas a entrar, cierra la puerta. Hay corrientes de aire."
+        mc "Siempre tan hospitalaria, [h_mayor_name]."
+        roxane "No me molestes, estoy intentando leer. Aunque si quieres ser útil, podrías masajearme los hombros."
+    else:
+        narrador "El cuarto de [h_mayor_name] es ordenado y algo frío."
+    jump menu_planta_alta
+
+label loc_cuarto_roxy:
+    scene bg cuarto_roxy
+    if momento_dia == "Mañana":
+        show sprite roxy at right, zoom_sprite
+        roxy "¡Cuidado donde pisas! Todavía no termino de arreglar mis cosas."
+        mc "Parece que explotó una maleta aquí dentro."
+        roxy "Es el precio de la belleza. ¿Te gusta mi outfit o vas a seguir criticando, [mc_name]?"
+    else:
+        narrador "El cuarto de [roxy_name] tiene un espejo enorme y mucha ropa por todas partes."
+    jump menu_planta_alta
+
+label loc_cuarto_kiry:
+    scene bg cuarto_kiry
+    if momento_dia == "Tarde":
+        show sprite kiry at right, zoom_sprite
+        kiry "¡[mc_name]! Ven a jugar conmigo, me aburro muchísimo."
+        mc "Tengo cosas que hacer, [h_menor_name]."
+        kiry "No seas amargado. Si te quedas, te dejo que me ayudes a elegir qué pijama ponerme."
+    else:
+        narrador "El cuarto de [h_menor_name] es un caos de peluches y cargadores de celular."
+    jump menu_planta_alta
+    
+label loc_cuarto_mc:
+    scene bg cuarto_mc
+    narrador "Este es tu cuarto. Es pequeño y frío."
+
+    menu:
+        "Dormir una siesta (Avanzar tiempo)":
+            mc "Un rato en la cama no me hará daño."
             jump avanzar_tiempo
 
-# ==========================================
-# 10. Locaciones y Eventos (Diálogos Adaptados)
-# ==========================================
+        "{color=#f00}Jugar a las Cartas con [roxy_name]{/color}" if momento_dia == "Noche" and evento_roxy_bano_visto and amor_roxy >= 5 and not evento_playcartas_visto:
+            jump evento_cartas_roxy
 
+        "Volver al pasillo":
+            jump menu_planta_alta
+
+# --- SALA ---
 label loc_sala:
     scene bg sala
-    if momento_dia == "Noche":
-        # Usamos variable de nombre
+    
+    if momento_dia == "Mañana" and not evento_roxane_yoga_visto:
+        jump evento_yoga_roxane
+        
+    elif momento_dia == "Tarde" and not evento_kiry_platica_visto:
+        jump evento_platica_kiry
+        
+    elif momento_dia == "Noche":
         narrador "La sala está oscura. [h_mayor_name] está sentada en el sofá con una copa de vino."
         show sprite roxane at right, zoom_sprite
         roxane "¿No puedes dormir, [mc_name]?"
@@ -285,16 +394,16 @@ label loc_sala:
         hide sprite roxane
     else:
         narrador "La sala está vacía. Solo se escucha el viento golpeando la ventana."
+        
     jump hub_principal
 
-
+# --- COCINA ---
 label loc_cocina:
     scene bg cocina
     if momento_dia == "Mañana" and not evento_madre_cocina_visto:
         $ evento_madre_cocina_visto = True
         narrador "[madre_name] está sacando unas latas de los estantes inferiores."
         show Vista_cocina at fullscreen with flash
-        # DIÁLOGO ACTUALIZADO: Usamos [madre_rol]
         narrador "Tu [madre_rol] lleva un vestido de tirantes rojos. Sin darse cuenta, la tela se ha subido, exponiendo sus muslos y su trasero."
         mc "Mierda... menuda vista."
         show Vista_cocina2 at fullscreen with flash
@@ -306,7 +415,6 @@ label loc_cocina:
                 show Vista_cocina3 at fullscreen with flash
                 madre "¿Te gusta la vista, [mc_name]?"
                 mc "Si te pones así, es imposible mirar a otro lado."
-                # DIÁLOGO ACTUALIZADO: Ella reacciona según el rol implícito (madre/tía vs casera)
                 if tipo_relacion == "familia":
                     madre "Eres un descarado... y soy tu [madre_rol]. Ten un poco de respeto, aunque me guste que prestes atención."
                 else:
@@ -327,7 +435,7 @@ label loc_cocina:
         narrador "No hay nadie en la cocina. El fregadero está limpio."
     jump hub_principal
 
-
+# --- BAÑO ---
 label loc_bano:
     scene bg bano
     if momento_dia == "Tarde" and contenido_gay_activado and not evento_roxy_bano_visto:
@@ -345,13 +453,11 @@ label loc_bano:
                 show roxy_baño2 at fullscreen with flash
                 narrador "Roxy te mira con una sonrisa muy provocativa mientras el agua resbala por sus curvas."
                 show roxy_baño3 at fullscreen with flash
-                # DIÁLOGO ACTUALIZADO: Usamos [roxy_rol]
                 roxy "Deja de verme el culo... soy tu [roxy_rol], parece que quieres comértelo."
 
                 menu:
                     "Ese cuerpo está para eso y más, [roxy_name].":
                         $ amor_roxy += 3
-                        # DIÁLOGO ACTUALIZADO: Usamos [roxy_rol]
                         if tipo_relacion == "familia":
                             roxy "Mmm... que cosas dices de tu [roxy_rol]. Pásame esa toalla antes de que te quedes babeando."
                         else:
@@ -371,24 +477,86 @@ label loc_bano:
         narrador "El baño está libre y huele a humedad."
     jump hub_principal
 
+# --- EVENTOS ESPECÍFICOS ---
 
-label loc_cuarto_mc:
-    scene bg cuarto_mc
-    narrador "Este es tu cuarto. Es pequeño y frío."
-
-    # Menú corregido. Usamos {color=#f00} dentro del texto para pintarlo de rojo.
+label evento_yoga_roxane:
+    $ evento_roxane_yoga_visto = True
+    
+    show roxane_yoga1 at fullscreen with dissolve
+    narrador "Entras a la sala y encuentras a [h_mayor_name] en el suelo. Lleva ropa deportiva muy ajustada y está estirando."
+    
+    show roxane_yoga2 at fullscreen
+    mc "¿Yoga a estas horas y con este frío?"
+    
+    show roxane_yoga3 at fullscreen
+    roxane "Algunos tenemos disciplina, [mc_name]. No todos podemos pasarnos el encierro pudriéndonos en la cama."
+    
+    show roxane_yoga4 at fullscreen
+    roxane "Además, hazte un favor y aléjate. Apestas a pereza y tu ropa huele mal. Me desconcentras."
+    
+    show roxane_yoga5 at fullscreen
+    narrador "Su tono es despectivo y cortante, pero la postura en la que está expone cada curva de su cuerpo de forma agresiva."
+    
     menu:
-        "Dormir una siesta (Avanzar tiempo)":
-            mc "Un rato en la cama no me hará daño."
-            jump avanzar_tiempo
+        "No te pases de lista, sea tu [roxane_rol] o no.":
+            $ tension_roxane += 3
+            show roxane_yoga6 at fullscreen
+            mc "Bájale a tu tono. El agua caliente está racionada, no es mi culpa. Si no te gusta mi presencia, vete a tu cuarto."
+            
+            show roxane_yoga7 at fullscreen
+            roxane "Tsk... qué carácter. Al menos demuestras tener algo de sangre en las venas en lugar de solo agachar la cabeza."
+            
+            show roxane_yoga8 at fullscreen
+            narrador "Te lanza una mirada afilada, pero notas una leve sonrisa de satisfacción en su rostro antes de ignorarte y seguir con lo suyo."
+        
+        "Admirar la vista en silencio y coquetear.":
+            $ amor_roxane += 2
+            show roxane_yoga6 at fullscreen
+            mc "Como digas. Aunque con esas posturas que me estás regalando, el olor es lo de menos."
+            
+            show roxane_yoga7 at fullscreen
+            roxane "¿Eres idiota? Cierra la boca y deja de mirarme así."
+            
+            show roxane_yoga8 at fullscreen
+            narrador "Se queja y te da la espalda, pero notas cómo se ruboriza un poco. No hace ningún esfuerzo por cubrirse ni cambiar a una posición más recatada."
+            
+    jump hub_principal
 
-        "{color=#f00}Jugar a las Cartas con [roxy_name]{/color}" if momento_dia == "Noche" and evento_roxy_bano_visto and amor_roxy >= 5 and not evento_playcartas_visto:
-            jump evento_cartas_roxy
+label evento_platica_kiry:
+    $ evento_kiry_platica_visto = True
+    
+    show kiri_platica1 at fullscreen with dissolve
+    narrador "[h_menor_name] está sentada en el sofá, moviendo los pies de forma impaciente y jugando con su cabello."
+    
+    show kiri_platica2 at fullscreen
+    kiry "¡Al fin sales de tu cueva, [mc_name]! Ven, siéntate aquí un rato."
+    
+    show kiri_platica3 at fullscreen
+    mc "¿Qué mosca te picó ahora?"
+    
+    show kiri_platica4 at fullscreen
+    kiry "Estoy aburrida. Ya me cansé de ver las paredes y el techo. Dame algo de atención."
+    
+    show kiri_platica5 at fullscreen
+    kiry "Dime la verdad... ¿Crees que me estoy viendo fea con tanto encierro? Siento que parezco un oso desaliñado."
+    
+    menu:
+        "Te ves bien, como siempre.":
+            $ amor_kiry += 3
+            show kiri_platica6 at fullscreen
+            mc "Tranquila, te ves linda. El encierro no te ha quitado lo atractiva."
+            kiry "Aww... sabía que en el fondo no eras tan insensible de roca. Gracias, [mc_name]."
+            narrador "Te regala una sonrisa genuina y se acurruca un poco más cerca de ti en el sofá, buscando tu calor."
+        
+        "Te ves como una niña caprichosa.":
+            $ odio_kiry += 2
+            show kiri_platica6 at fullscreen
+            mc "Te ves igual de mandona y desordenada que siempre. Deja de quejarte."
+            kiry "¡Oye! Eres un amargado de lo peor. Ojalá te congeles en el pasillo."
+            narrador "Cruza los brazos, hace un puchero ofendida y se voltea hacia el otro lado indignada."
+            
+    jump hub_principal
 
-        "Volver al pasillo":
-            jump hub_principal
-
-# --- Escena del Juego de Cartas con Roxy ---
 label evento_cartas_roxy:
     $ evento_playcartas_visto = True
 
@@ -444,7 +612,7 @@ label evento_cartas_roxy:
     roxy "Bueno... creo que me quedé sin opciones, ¿no?"
 
     show playcartas18 at fullscreen
-    narrador "se quita su tanga rosa sin un gramo de vergüenza."
+    narrador "Se quita su tanga rosa sin un gramo de vergüenza."
 
     show playcartas19 at fullscreen
     narrador "[roxy_name] está desnuda. La habitación de pronto se siente mucho más caliente."
@@ -453,8 +621,8 @@ label evento_cartas_roxy:
     roxy "¿Te gusta lo que ves? Tienes la boca medio abierta."
 
     show playcartas21 at fullscreen
-    mc "no pienses que la tienes facil."
-    roxy "mirate pareces un animal"
+    mc "No pienses que la tienes fácil."
+    roxy "Mírate, pareces un animal."
 
     show playcartas22 at fullscreen
     roxy "Tan duro por fuera... me pregunto qué más estará duro ahora mismo."
@@ -466,32 +634,30 @@ label evento_cartas_roxy:
     roxy "¿Qué vas a hacer [mc_name]?"
 
     show playcartas25 at fullscreen
-    roxy "vamos dime"
+    roxy "Vamos, dime."
 
     show playcartas26 at fullscreen
-    # DIÁLOGO ACTUALIZADO: Usamos variable de nombre
-    narrador "los dedos de [mc_name] se intruden en el ano de [roxy_name]"
+    narrador "Los dedos de [mc_name] se introducen en el ano de [roxy_name]."
 
     show playcartas27 at fullscreen
-    # DIÁLOGO ACTUALIZADO: Usamos [roxy_rol]
     if tipo_relacion == "familia":
-        roxy "estoy lista para recibirte [roxy_rol]ito siempre eh querido que juegues conmigo por ahi , hazme tu puta , la puta de tu [roxy_rol] soy yo [roxy_name]"
+        roxy "Estoy lista para recibirte [roxy_rol]ito, siempre he querido que juegues conmigo por ahí. Hazme tu puta, la puta de tu [roxy_rol] soy yo, [roxy_name]."
     else:
-        roxy "estoy lista para recibirte [mc_name] siempre eh querido que juegues conmigo por ahi , hazme tu puta , la puta de la casa soy yo [roxy_name]"
+        roxy "Estoy lista para recibirte [mc_name], siempre he querido que juegues conmigo por ahí. Hazme tu puta, la puta de la casa soy yo, [roxy_name]."
 
     show playcartas28 at fullscreen
-    narrador "La tensión está a punto de reventar. Su cavidad anal esta lista para recibirte  cuando..."
+    narrador "La tensión está a punto de reventar. Su cavidad anal está lista para recibirte cuando..."
 
-    madre "¡[mc_name]s! ¡La cena ya está caliente! ¡Bajen al comedor ahora mismo!"
+    madre "¡Chicos! ¡La cena ya está caliente! ¡Bajen al comedor ahora mismo!"
 
     narrador "Ambos saltan del susto, separándose de golpe como si los hubieran quemado."
 
-    mc "Mierda... mamá."
+    mc "Mierda... [madre_name]."
 
     roxy "Jaja... salvado por la campana, Romeo. Vístete rápido. Te espero abajo."
 
     $ amor_roxy += 5
-    $ tension_roxane += 2 # La tensión general en la casa sube
+    $ tension_roxane += 2 
 
     jump avanzar_tiempo
 
@@ -512,18 +678,18 @@ label avanzar_tiempo:
         $ evento_madre_cocina_visto = False
         $ evento_roxy_bano_visto = False
         $ evento_playcartas_visto = False
+        $ evento_roxane_yoga_visto = False
+        $ evento_kiry_platica_visto = False
 
     scene black with dissolve
     narrador "Unas horas más tarde..."
 
-    # Evento automático al cambiar el día
     if dia == 2 and momento_dia == "Mañana":
         scene bg cuarto_mc
         show sprite kiry at right, zoom_sprite
         kiry "¡Despierta, [mc_name]! Me aburro."
         mc "¿Qué quieres, enana?"
         kiry "No me digas enana. Tengo frío, hazme un espacio."
-        # DIÁLOGO ACTUALIZADO: Usamos variable de nombre
         narrador "Se mete bajo tus sábanas antes de que puedas protestar, pegando sus piernas a las tuyas."
         $ amor_kiry += 2
 
