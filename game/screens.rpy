@@ -740,6 +740,12 @@ screen preferences():
 
         vbox:
 
+            vbox:
+                style_prefix "radio"
+                label _("Idioma / Language")
+                textbutton "Español" action Language(None)
+                textbutton "English" action Language("english")
+
             hbox:
                 box_wrap True
 
