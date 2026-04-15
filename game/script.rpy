@@ -71,6 +71,7 @@ default evento_roxy_bano_visto = False
 default evento_playcartas_visto = False
 default evento_roxane_yoga_visto = False
 default evento_kiry_platica_visto = False
+default evento_madre_noche_visto = False
 
 # ==========================================
 # 8. Inicio del juego (Configuración)
@@ -344,21 +345,28 @@ label loc_sala:
         jump evento_platica_kiry
         
     elif momento_dia == "Noche":
-        narrador "La sala está oscura. [h_mayor_name] está sentada en el sofá con una copa de vino."
-        show Roxane at right, zoom_sprite
-        roxane "¿No puedes dormir, [mc_name]?"
-        menu:
-            "Hacerle compañía":
-                mc "No. El frío no me deja."
-                roxane "Si tienes frío, acércate. No muerdo. Al menos, no siempre."
-                $ amor_roxane += 1
-                $ tension_roxane += 2
-                narrador "Te sientas a su lado. Su pierna roza la tuya bajo la manta."
-            "Dejarla sola":
-                mc "Solo iba por agua. Ya me voy."
-                roxane "Qué aburrido eres."
-                $ amor_roxane -= 1
-        hide Roxane
+        # Verificamos primero el evento de la madre
+        if amor_madre >= 1 and not evento_madre_noche_visto:
+            jump evento_noche_madre
+            
+        # Si no se cumple o ya se vio, carga la escena normal de Roxane
+        else:
+            narrador "La sala está oscura. [h_mayor_name] está sentada en el sofá con una copa de vino."
+            show Roxane at right, zoom_sprite
+            roxane "¿No puedes dormir, [mc_name]?"
+            menu:
+                "Hacerle compañía":
+                    mc "No. El frío no me deja."
+                    roxane "Si tienes frío, acércate. No muerdo. Al menos, no siempre."
+                    $ amor_roxane += 1
+                    $ tension_roxane += 2
+                    narrador "Te sientas a su lado. Su pierna roza la tuya bajo la manta."
+                "Dejarla sola":
+                    mc "Solo iba por agua. Ya me voy."
+                    roxane "Qué aburrido eres."
+                    $ amor_roxane -= 1
+            hide Roxane
+            
     else:
         narrador "La sala está vacía. Solo se escucha el viento golpeando la ventana."
         
@@ -627,6 +635,180 @@ label evento_cartas_roxy:
     $ tension_roxane += 2 
 
     jump avanzar_tiempo
+
+# ==========================================
+# NUEVO EVENTO: Madre en la Sala (Noche, Amor >= 25)
+# ==========================================
+
+
+label evento_noche_madre:
+    $ evento_madre_noche_visto = True
+    # --- FASE 1: CONFESIÓN ---
+    scene sala night with dissolve
+    narrador "Bajas a la sala a oscuras. Las sombras apenas dejan ver la silueta de tu [madre_rol] en el sofá. Lleva un camisón que no oculta casi nada de sus curvas."
+    
+    show madre_noche_1 at fullscreen with dissolve
+    narrador "Se pone de pie lentamente cuando te ve. Su mirada es pesada, cargada de una decisión que lleva años guardando."
+    
+    show madre_noche_2 at fullscreen with dissolve
+    madre "Pensé que estabas dormido, [mc_name]..."
+    
+    show madre_noche_3 at fullscreen with dissolve
+    madre "No podía dormir. El frío, el encierro... todo esto me está volviendo loca. Me hace pensar en cosas que no debería."
+    
+    show madre_noche_4 at fullscreen with dissolve
+    madre "He pasado años cuidándote, viéndote crecer... y viéndome a mí misma marchitarme con un hombre débil. Un esposo que nunca me miró de la forma en que tú lo haces."
+    
+    show madre_noche_5 at fullscreen with dissolve
+    mc "Estás borracha o delirando."
+    
+    show madre_noche_6 at fullscreen with dissolve
+    madre "Ni una ni la otra. Estoy harta de verte mirar a Roxy. Me hierve la sangre ver cómo buscas su atención, cómo la deseas..."
+    
+    show madre_noche_7 at fullscreen with dissolve
+    madre "Soy mucho más mujer que ella. Tengo más experiencia, más hambre... Tengo más años deseándote en silencio de los que ella lleva viva. Y esta noche, te lo voy a demostrar."
+
+    # --- FASE 2: PROPUESTA Y DESNUDO ESPECTACULAR ---
+    show madre_noche_propuesta1 at fullscreen with flash
+    narrador "Sin dudarlo un segundo, [madre_name] comienza a quitarse el camisón. Su cuerpo se revela en la penumbra de la sala."
+    
+    show madre_noche_propuesta2 at fullscreen
+    madre "Llevo tanto tiempo esperando este momento..."
+    
+    show madre_noche_propuesta3 at fullscreen
+    mc "Dios... sabes que esto es una locura absoluta."
+    
+    show madre_noche_propuesta4 at fullscreen
+    madre "La única locura es haber esperado tanto. Mírame, [mc_name]. ¿Acaso no soy lo que siempre has querido?"
+    
+    show madre_noche_propuesta5 at fullscreen
+    madre "¿Crees que Roxy te miraría con este hambre? ¿Crees que ella sabría cómo usarte de verdad?"
+    
+    show madre_noche_propuesta6 at fullscreen
+    mc "Cállate... no lo hagas más difícil."
+    
+    show madre_noche_propuesta7 at fullscreen
+    madre "Házmelo difícil tú. Tómame. Hazme tuya como solo tú sabes hacerlo."
+    
+    show madre_noche_propuesta8 at fullscreen
+    narrador "[madre_name] se desliza el resto de su ropa. Su cuerpo está totalmente expuesto ante ti, temblando de anticipación."
+    
+    show madre_noche_propuesta9 at fullscreen
+    madre "He imaginado tus manos en mí... tus labios en los míos. Cada vez que pasabas a mi lado, cada vez que te veía dormir..."
+    
+    show madre_noche_propuesta10 at fullscreen
+    mc "He querido esto... pero no así."
+    
+    show madre_noche_propuesta11 at fullscreen
+    madre "Mientes. Quieres que te use. Quieres sentir mi cuerpo contra el tuyo."
+    
+    show madre_noche_propuesta12 at fullscreen
+    madre "He visto cómo me miras cuando cocinas, cuando me agacho. He sentido cómo tu deseo me quemaba la piel."
+    
+    show madre_noche_propuesta13 at fullscreen
+    madre "Eres rudo, posesivo... exactamente lo que necesito. Él nunca tuvo esa oscuridad, ese fuego que tienes tú."
+    
+    show madre_noche_propuesta14 at fullscreen
+    mc "Estás enferma."
+    
+    show madre_noche_propuesta15 at fullscreen
+    madre "Enferma de ti, sí. Me pone a mil pensar en lo bruto que puedes llegar a ser. Necesito sentir cómo me agarras duro contra la pared y me revientas."
+    
+    show madre_noche_propuesta16 at fullscreen
+    madre "Sé que quieres romperme, [mc_name]. Sé que quieres poseer a tu [madre_rol]."
+    
+    show madre_noche_propuesta17 at fullscreen
+    madre "No me importa lo que piensen los demás. No me importa el pecado. Solo me importas tú, tu deseo, tu cuerpo sobre el mío."
+    
+    show madre_noche_propuesta18 at fullscreen
+    madre "Él nunca fue suficiente. Tú... tú eres más hombre que él jamás fue."
+    
+    show madre_noche_propuesta19 at fullscreen
+    mc "Mierda... cállate..."
+    
+    show madre_noche_propuesta20 at fullscreen
+    madre "¿Vas a seguir hablando o vas a coger lo que te ofrezco?"
+    
+    show madre_noche_propuesta21 at fullscreen
+    madre "Mírame... Mírame bien. Soy tuya. Todo mi ser está a tu disposición."
+    
+    show madre_noche_propuesta22 at fullscreen
+    madre "Solo tienes que decir que sí..."
+
+    # --- FASE 3: ORAL ESPECTACULAR ---
+    show madre_noche_oral at fullscreen with flash
+    narrador "Sin esperar respuesta, [madre_name] se arrodilla ante ti. La tensión se rompe con el primer contacto húmedo de su lengua."
+    
+    show madre_noche_oral2 at fullscreen
+    mc "Dios... no... para..."
+    
+    show madre_noche_oral3 at fullscreen
+    madre "Mmmhhh... te gusta, ¿verdad, [mc_name]? No puedes negarlo ahora."
+    
+    show madre_noche_oral4 at fullscreen
+    mc "Eres increíble... esto es una locura..."
+    
+    show madre_noche_oral5 at fullscreen
+    madre "Solo es el principio, cariño... Mírame. Soy tu [madre_rol] y te estoy sirviendo. ¿Acaso no es lo más rudo que has hecho?"
+
+    # --- FASE 4: EL ACTO (PENETRACIÓN) ESPECTACULAR ---
+    show madre_noche_sexo1 at fullscreen with flash
+    narrador "La sala se llena de jadeos rítmicos y el sonido húmedo de la piel contra la piel. La tensión acumulada estalla en un acto primal."
+    
+    show madre_noche_sexo2 at fullscreen
+    madre "¡Ahhh! ¡Por fin... Dios, [mc_name], por fin estás dentro!"
+    
+    show madre_noche_sexo3 at fullscreen
+    mc "Eres una zorra... siempre supe que querías esto."
+    
+    show madre_noche_sexo4 at fullscreen
+    madre "¡Sí, soy tu zorra, cariño! ¡Trátame como la ruda que soy! ¡Rompe a tu [madre_rol]!"
+    
+    show madre_noche_sexo5 at fullscreen
+    mc "¡Eres ruda, enfermiza... y me encanta!"
+    
+    show madre_noche_sexo6 at fullscreen
+    madre "¡Mmmhhh... dios... sí! ¡Fóllame como él nunca pudo! ¡Olvida a Roxy! ¡Yo soy tuya, cariño, solo tuya!"
+
+    # --- FASE 5: ARREPENTIMIENTO DRAMÁTICO ---
+    show madre_noche_sexo_arrepentimiento at fullscreen with dissolve
+    narrador "El silencio cae pesado en la sala. Las respiraciones agitadas se calman lentamente. La adrenalina baja y la realidad golpea con dureza."
+    
+    show madre_noche_sexo_arrepentimiento2 at fullscreen
+    narrador "[madre_name] se queda inmóvil bajo tu cuerpo, con la mirada perdida en el techo de la sala."
+    
+    show madre_noche_sexo_arrepentimiento3 at fullscreen
+    madre "Mierda... ¿qué... qué hemos hecho?"
+    
+    show madre_noche_sexo_arrepentimiento4 at fullscreen
+    madre "Soy una monstruosidad... Soy tu [madre_rol] y..."
+    
+    show madre_noche_sexo_arrepentimiento5 at fullscreen
+    mc "Tranquila. Pasó. Los dos lo quisimos."
+    
+    show madre_noche_sexo_arrepentimiento6 at fullscreen
+    madre "¡Cállate! No lo entiendes. Esto... esto es imperdonable."
+    
+    show madre_noche_sexo_arrepentimiento7 at fullscreen
+    madre "Fue el encierro... la tensión me volvió loca. Tienes que olvidar que esto pasó. Fue un error. Un asqueroso error."
+    
+    show madre_noche_sexo_arrepentimiento8 at fullscreen
+    narrador "[Agrega aquí diálogo explícito sobre el arrepentimiento asqueroso]"
+    
+    show madre_noche_sexo_arrepentimiento9 at fullscreen
+    mc "No finjas ahora. Lo quisiste. Lo pediste."
+    
+    show madre_noche_sexo_arrepentimiento10 at fullscreen
+    madre "¡He dicho que te calles! ¡No me vuelvas a mirar así! Olvídalo todo, ¿me oyes? ¡Olvida que soy tuya!"
+    
+    narrador "Se viste a trompicones, evitando mirarte a la cara a toda costa, y sale corriendo hacia el pasillo de arriba. Te quedas solo en el sofá."
+    
+    $ tension_madre += 10
+    $ amor_madre += 2 
+    
+    jump hub_principal
+
+
 
 
 # ==========================================
