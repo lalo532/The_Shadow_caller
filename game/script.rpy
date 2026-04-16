@@ -3,19 +3,16 @@
 # ==========================================
 default mc_name = "MC"
 
-# Nombres propios
 default madre_name = "Madre"
 default roxy_name = "Roxy"
 default h_mayor_name = "Roxane"
 default h_menor_name = "Kiry"
 
-# VARIABLES DE ROL
 default madre_rol = "madre"
 default roxy_rol = "hermana"
 default roxane_rol = "hermana mayor"
 default kiry_rol = "hermana menor"
 
-# Variable de control interna
 default tipo_relacion = "familia" 
 
 # ==========================================
@@ -42,15 +39,13 @@ transform zoom_sprite:
     yalign 1.0
 
 # ==========================================
-# 4. Variables de Sandbox y Tiempo
+# 4. Variables del juego
 # ==========================================
 default dia = 1
 default momento_dia = "Mañana"
 default contenido_gay_activado = False
 
-# ==========================================
-# 5. Sistema de Estadísticas
-# ==========================================
+# Estadísticas
 default amor_madre = 0
 default tension_madre = 0
 
@@ -63,9 +58,7 @@ default tension_roxane = 0
 default amor_kiry = 0
 default odio_kiry = 0
 
-# ==========================================
-# 6. Variables de control de eventos
-# ==========================================
+# Eventos
 default evento_madre_cocina_visto = False
 default evento_roxy_bano_visto = False
 default evento_playcartas_visto = False
@@ -74,7 +67,7 @@ default evento_kiry_platica_visto = False
 default evento_madre_noche_visto = False
 
 # ==========================================
-# 8. Inicio del juego (Configuración)
+# INICIO DEL JUEGO
 # ==========================================
 label start:
 
@@ -173,7 +166,7 @@ label finalizar_configuracion:
     jump hub_principal
 
 # ==========================================
-# 9. El "Hub" o Pasillos
+# HUB
 # ==========================================
 label hub_principal:
     scene fondo_casa with dissolve
@@ -221,60 +214,45 @@ label menu_planta_alta:
             jump hub_principal
 
 # ==========================================
-# 10. Locaciones y Eventos 
+# LOCACIONES Y EVENTOS (TODAS LAS IMÁGENES ORIGINALES)
 # ==========================================
-# --- CUARTOS ---
+
 label loc_cuarto_madre:
-    # Recuerda usar fondo_casa si no has agregado la imagen de cuarto_madre al .bat
     scene cuarto_madre 
-    
-    # Primero verificamos si tienen alto nivel de amor (Evento especial)
     if momento_dia == "Noche" and amor_roxy >= 10:
         jump evento_madrexroxy
-
-    # Si es de noche pero el amor es 5 o menos (Evento normal)
-    elif momento_dia == "Noche" and amor_roxy <= 5:
+    elif momento_dia == "Noche":
         narrador "La puerta está entreabierta. [madre_name] está sentada en su cama aplicándose crema en las piernas."
         show Madre at right, zoom_sprite
         madre "¿Necesitas algo antes de dormir, [mc_name]?"
         mc "Solo pasaba a ver si todo estaba en orden."
         madre "Todo bien. Aunque esta cama se siente demasiado grande para una sola persona con este frío..."
         jump menu_planta_alta
-
-    # Para cualquier otro momento del día o si el amor está entre 6 y 9
     else:
         narrador "El cuarto de tu [madre_rol] está impecable y huele a su perfume."
         jump menu_planta_alta
 
-
-# Separamos la escena especial en su propio label para mantener el orden
 label evento_madrexroxy:
-    
     narrador "Te acercas a la habitación. La puerta no está cerrada del todo. Escuchas jadeos ahogados y el sonido húmedo de piel contra piel."
     
     scene mom_roxy at fullscreen with flash 
-    
-    narrador "Te asomas con cuidado. Lo que ves te deja helado. [roxy_name] está sobre la cama, dominando a tu [madre_rol]."
+    narrador "Te asomas con cuidado. [roxy_name] está sobre la cama, dominando a tu [madre_rol]."
     
     madre "Mghh... Ay, [roxy_name]... con todo el esfuerzo que haces por verte tan femenina, y resulta que esto sigue siendo lo más rico que tienes."
     
     scene mom_roxy1 at fullscreen with dissolve
-    
     roxy "Cállate y traga. Sabes que soy bisexual... y si te estoy dejando usarme así, es porque el encierro me tiene loca."
     roxy "Además... me sirve para calentar motores. Sabes perfectamente a quién tengo en la cabeza mientras te follo."
     
     scene mom_roxy2 at fullscreen with dissolve
-    
     madre "Ah... ¿[mc_name]? Ja... no seas ingenua, zorrita. Él me mira a mí."
     madre "Desde que nos quedamos atrapados aquí, veo cómo se le van los ojos a mis tetas. Tiene una mirada de hambre pura... de un hombre de verdad que está a punto de perder el control. Eso me empapa."
     
     scene mom_roxy3 at fullscreen with dissolve
-    
     roxy "Te equivocas. Él tiene esa misma mirada ruda conmigo. Y me encanta."
     roxy "Me gusta que no tiene filtros, me trata como quiere... necesito sentir cómo me agarra duro contra la pared y me revienta. Me pone a mil pensar en lo bruto que puede llegar a ser."
     
     scene mom_roxy4 at fullscreen with flash
-    
     madre "Mmmhhh... dios... entonces méntelo más profundo, perra. Imagina que es él quien te está usando así."
     roxy "Ahhh... joder, sí. Las dos estamos igual de enfermas por él."
     
@@ -283,9 +261,8 @@ label evento_madrexroxy:
     mc "(Mierda... están completamente locas. Será mejor que me vaya antes de que me descubran y esto se salga de control.)"
     
     narrador "Te alejas lentamente por el pasillo, intentando calmar tu respiración."
-
     jump menu_planta_alta
-    
+
 label loc_cuarto_roxane:
     scene cuarto_roxane
     if momento_dia == "Tarde":
@@ -345,11 +322,8 @@ label loc_sala:
         jump evento_platica_kiry
         
     elif momento_dia == "Noche":
-        # Verificamos primero el evento de la madre
         if amor_madre >= 1 and not evento_madre_noche_visto:
             jump evento_noche_madre
-            
-        # Si no se cumple o ya se vio, carga la escena normal de Roxane
         else:
             narrador "La sala está oscura. [h_mayor_name] está sentada en el sofá con una copa de vino."
             show Roxane at right, zoom_sprite
@@ -366,7 +340,6 @@ label loc_sala:
                     roxane "Qué aburrido eres."
                     $ amor_roxane -= 1
             hide Roxane
-            
     else:
         narrador "La sala está vacía. Solo se escucha el viento golpeando la ventana."
         
@@ -389,11 +362,8 @@ label loc_cocina:
                 narrador "No intentas disimular. Ella se da cuenta al voltear."
                 show madre_cocina3 at fullscreen with flash
                 madre "¿Te gusta la vista, [mc_name]?"
-                mc "Si te pones así, es imposible mirar a otro lado."
-                if tipo_relacion == "familia":
-                    madre "Eres un descarado... y soy tu [madre_rol]. Ten un poco de respeto, aunque me guste que prestes atención."
-                else:
-                    madre "Eres un descarado... pero me gusta que prestes atención, [mc_name]."
+                mc "Si te pones así, es imposible mirar a otro lado. Ese culo me tiene la verga palpitando."
+                madre "Eres un descarado... pero me gusta que prestes atención, [mc_name]."
                 show madre_cocina4 at fullscreen with flash
                 madre "Mejor ven y ayúdame con esto."
 
@@ -433,11 +403,7 @@ label loc_bano:
                 menu:
                     "Ese cuerpo está para eso y más, [roxy_name].":
                         $ amor_roxy += 3
-                        if tipo_relacion == "familia":
-                            roxy "Mmm... que cosas dices de tu [roxy_rol]. Pásame esa toalla antes de que te quedes babeando."
-                        else:
-                            roxy "Mmm... atrevido para ser un [roxy_rol]. Pásame esa toalla antes de que te quedes babeando."
-
+                        roxy "Mmm... qué cosas dices de tu [roxy_rol]. Pásame esa toalla antes de que te quedes babeando."
                     "Bájate de tu nube. Ni que fueras para tanto.":
                         $ amor_roxy -= 2
                         roxy "Idiota. Lárgate de aquí y cierra la puerta."
@@ -452,7 +418,9 @@ label loc_bano:
         narrador "El baño está libre y huele a humedad."
     jump hub_principal
 
-# --- EVENTOS ESPECÍFICOS ---
+# ==========================================
+# EVENTOS ESPECÍFICOS (TODAS LAS IMÁGENES ORIGINALES)
+# ==========================================
 
 label evento_yoga_roxane:
     $ evento_roxane_yoga_visto = True
@@ -615,10 +583,7 @@ label evento_cartas_roxy:
     narrador "Los dedos de [mc_name] se introducen en el ano de [roxy_name]."
 
     show playcartas27 at fullscreen
-    if tipo_relacion == "familia":
-        roxy "Estoy lista para recibirte [roxy_rol], siempre he querido que juegues conmigo por ahí. Hazme tu puta, la puta de tu [roxy_rol] soy yo, [roxy_name]."
-    else:
-        roxy "Estoy lista para recibirte [mc_name], siempre he querido que juegues conmigo por ahí. Hazme tu puta, la puta de la casa soy yo, [roxy_name]."
+    roxy "Estoy lista para recibirte [roxy_rol], siempre he querido que juegues conmigo por ahí. Hazme tu puta, la puta de tu [roxy_rol] soy yo, [roxy_name]."
 
     show playcartas28 at fullscreen
     narrador "La tensión está a punto de reventar. Su cavidad anal está lista para recibirte cuando..."
@@ -637,13 +602,10 @@ label evento_cartas_roxy:
     jump avanzar_tiempo
 
 # ==========================================
-# NUEVO EVENTO: Madre en la Sala (Noche, Amor >= 25)
+# EVENTO MADRE NOCHE (TODAS LAS IMÁGENES ORIGINALES)
 # ==========================================
-
-
 label evento_noche_madre:
     $ evento_madre_noche_visto = True
-    # --- FASE 1: CONFESIÓN ---
     scene sala night with dissolve
     narrador "Bajas a la sala a oscuras. Las sombras apenas dejan ver la silueta de tu [madre_rol] en el sofá. Lleva un camisón que no oculta casi nada de sus curvas."
     
@@ -663,12 +625,11 @@ label evento_noche_madre:
     mc "Estás borracha o delirando."
     
     show madre_noche_6 at fullscreen with dissolve
-    madre "Ni una ni la otra. Estoy harta de verte mirar a Roxy. Me hierve la sangre ver cómo buscas su atención, cómo la deseas..."
+    madre "Ni una ni la otra. Estoy harta de verte mirar a Roxane. Me hierve la sangre ver cómo buscas su atención, cómo la deseas..."
     
     show madre_noche_7 at fullscreen with dissolve
     madre "Soy mucho más mujer que ella. Tengo más experiencia, más hambre... Tengo más años deseándote en silencio de los que ella lleva viva. Y esta noche, te lo voy a demostrar."
 
-    # --- FASE 2: PROPUESTA Y DESNUDO ESPECTACULAR ---
     show madre_noche_propuesta1 at fullscreen with flash
     narrador "Sin dudarlo un segundo, [madre_name] comienza a quitarse el camisón. Su cuerpo se revela en la penumbra de la sala."
     
@@ -682,7 +643,7 @@ label evento_noche_madre:
     madre "La única locura es haber esperado tanto. Mírame, [mc_name]. ¿Acaso no soy lo que siempre has querido?"
     
     show madre_noche_propuesta5 at fullscreen
-    madre "¿Crees que Roxy te miraría con este hambre? ¿Crees que ella sabría cómo usarte de verdad?"
+    madre "¿Crees que Roxane te miraría con este hambre? ¿Crees que ella sabría cómo usarte de verdad?"
     
     show madre_noche_propuesta6 at fullscreen
     mc "Cállate... no lo hagas más difícil."
@@ -735,7 +696,6 @@ label evento_noche_madre:
     show madre_noche_propuesta22 at fullscreen
     madre "Solo tienes que decir que sí..."
 
-    # --- FASE 3: ORAL ESPECTACULAR ---
     show madre_noche_oral at fullscreen with flash
     narrador "Sin esperar respuesta, [madre_name] se arrodilla ante ti. La tensión se rompe con el primer contacto húmedo de su lengua."
     
@@ -751,7 +711,6 @@ label evento_noche_madre:
     show madre_noche_oral5 at fullscreen
     madre "Solo es el principio, cariño... Mírame. Soy tu [madre_rol] y te estoy sirviendo. ¿Acaso no es lo más rudo que has hecho?"
 
-    # --- FASE 4: EL ACTO (PENETRACIÓN) ESPECTACULAR ---
     show madre_noche_sexo1 at fullscreen with flash
     narrador "La sala se llena de jadeos rítmicos y el sonido húmedo de la piel contra la piel. La tensión acumulada estalla en un acto primal."
     
@@ -768,9 +727,8 @@ label evento_noche_madre:
     mc "¡Eres ruda, enfermiza... y me encanta!"
     
     show madre_noche_sexo6 at fullscreen
-    madre "¡Mmmhhh... dios... sí! ¡Fóllame como él nunca pudo! ¡Olvida a Roxy! ¡Yo soy tuya, cariño, solo tuya!"
+    madre "¡Mmmhhh... dios... sí! ¡Fóllame como él nunca pudo! ¡Olvida a Roxane! ¡Yo soy tuya, cariño, solo tuya!"
 
-    # --- FASE 5: ARREPENTIMIENTO DRAMÁTICO ---
     show madre_noche_sexo_arrepentimiento at fullscreen with dissolve
     narrador "El silencio cae pesado en la sala. Las respiraciones agitadas se calman lentamente. La adrenalina baja y la realidad golpea con dureza."
     
@@ -793,7 +751,7 @@ label evento_noche_madre:
     madre "Fue el encierro... la tensión me volvió loca. Tienes que olvidar que esto pasó. Fue un error. Un asqueroso error."
     
     show madre_noche_sexo_arrepentimiento8 at fullscreen
-    narrador "[Agrega aquí diálogo explícito sobre el arrepentimiento asqueroso]"
+    madre "No puedo creer que te dejé follarme como a una puta barata... soy tu [madre_rol] y acabo de correrme gritando tu nombre."
     
     show madre_noche_sexo_arrepentimiento9 at fullscreen
     mc "No finjas ahora. Lo quisiste. Lo pediste."
@@ -808,11 +766,8 @@ label evento_noche_madre:
     
     jump hub_principal
 
-
-
-
 # ==========================================
-# 11. Motor de paso de tiempo
+# MOTOR DE PASO DE TIEMPO
 # ==========================================
 label avanzar_tiempo:
     if momento_dia == "Mañana":
@@ -823,7 +778,6 @@ label avanzar_tiempo:
         $ momento_dia = "Mañana"
         $ dia += 1
 
-        # Reseteamos los eventos al cambiar de día
         $ evento_madre_cocina_visto = False
         $ evento_roxy_bano_visto = False
         $ evento_playcartas_visto = False
