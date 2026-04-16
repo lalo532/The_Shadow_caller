@@ -1,7 +1,7 @@
 ﻿# ==========================================
-# MADRE NOCHE - script.rpy (Archivo principal - v2.1)
-# Este archivo solo contiene el inicio y el HUB.
-# Todo lo demás está repartido en las otras carpetas.
+# MADRE NOCHE - script.rpy (Versión FINAL limpia)
+# Solo contiene inicio, configuración y HUB.
+# Los eventos están en game/events/
 # ==========================================
 
 # ==========================================
@@ -152,10 +152,10 @@ label menu_planta_alta:
             jump hub_principal
 
 # ==========================================
-# AVANZAR TIEMPO (mejorado con tensión_casa)
+# AVANZAR TIEMPO (Slow-burn)
 # ==========================================
 label avanzar_tiempo:
-    $ tension_casa += 12   # Aumenta la tensión general cada vez que avanzas tiempo
+    $ tension_casa += 12
 
     if momento_dia == "Mañana":
         $ momento_dia = "Tarde"
@@ -165,7 +165,6 @@ label avanzar_tiempo:
         $ momento_dia = "Mañana"
         $ dia += 1
 
-        # Reset eventos diarios
         $ evento_madre_cocina_visto = False
         $ evento_roxy_bano_visto = False
         $ evento_playcartas_visto = False
@@ -176,12 +175,6 @@ label avanzar_tiempo:
     narrador "Unas horas más tarde..."
 
     if dia == 2 and momento_dia == "Mañana":
-        scene fondo_casa
-        show Kiri at right, zoom_sprite
-        kiry "¡Despierta, [mc_name]! Me aburro."
-        mc "¿Qué quieres, enana?"
-        kiry "No me digas enana. Tengo frío, hazme un espacio."
-        narrador "Se mete bajo tus sábanas antes de que puedas protestar, pegando sus piernas a las tuyas."
-        $ amor_kiry += 2
+        jump evento_kiry_cama
 
     jump hub_principal
