@@ -1629,14 +1629,11 @@ style slider_slider:
     variant "small"
     xsize 900
 
-screen hud_tiempo():
-    # frame crea un recuadro de fondo para el texto
+screen hud_tiempo:
     frame:
-        xalign 0.02 # Pegado a la izquierda
-        yalign 0.02 # Pegado arriba
-        
-        # vbox acomoda los elementos de arriba hacia abajo
+        xalign 0.98 yalign 0.02
+        xpadding 20 ypadding 10
         vbox:
-            text "Día [dia] - [momento_dia]" size 24 bold True
-            null height 10 # Espacio en blanco
-            textbutton "Avanzar Tiempo" action Jump("avanzar_tiempo")
+            text "Día [dia]" size 28 color "#fff"
+            text "[momento_dia]" size 22 color "#ffcc00"
+            text "Tensión en la casa: [tension_casa]/100" size 18 color "#ff6666"
