@@ -96,19 +96,25 @@ style frame:
 ## https://www.renpy.org/doc/html/screen_special.html#say
 
 screen say(who, what):
+    style_prefix "say"
 
     window:
         id "window"
+        background Transform("gui/textbox.png", alpha=persistent.dialogue_box_alpha)
+
+        # Si quieres mantener bordes redondeados o estilo, puedes usar Frame:
+        # background Transform(Frame("gui/textbox.png", gui.textbox_borders), alpha=persistent.dialogue_box_alpha)
+
+        xalign 0.5
+        yalign 1.0
 
         if who is not None:
-
             window:
                 id "namebox"
                 style "namebox"
                 text who id "who"
 
         text what id "what"
-
 
     ## Si hay una imagen lateral, la muestra encima del texto. No la muestra en
     ## la variante de teléfono - no hay lugar.
@@ -739,6 +745,12 @@ screen preferences():
     use game_menu(_("Opciones"), scroll="viewport"):
 
         vbox:
+
+            vbox:
+                style_prefix "radio"
+                label _("Idioma / Language")
+                textbutton "Español" action Language(None)
+                textbutton "English" action Language("english")
 
             hbox:
                 box_wrap True
@@ -1622,3 +1634,12 @@ style slider_vbox:
 style slider_slider:
     variant "small"
     xsize 900
+
+screen hud_tiempo:
+    frame:
+        xalign 0.98 yalign 0.02
+        xpadding 20 ypadding 10
+        vbox:
+            text "Día [dia]" size 28 color "#fff"
+            text "[momento_dia]" size 22 color "#ffcc00"
+            text "Tensión en la casa: [tension_casa]/100" size 18 color "#ff6666"

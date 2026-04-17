@@ -1,0 +1,24 @@
+{
+    "expansion": false,
+    "google_play_key": null,
+    "google_play_salt": null,
+    "heap_size": "2",
+    "icon_name": "Winter\u00b4s_Heat",
+    "include_pil": false,
+    "include_sqlite": false,
+    "layout": null,
+    "name": "Winter\u00b4s_Heat",
+    "numeric_version": 1,
+    "orientation": "sensor",
+    "package": "com.winters.heat.selecbross",
+    "permissions": [
+        "VIBRATE",
+        "INTERNET"
+    ],
+    "source": false,
+    "store": "none",
+    "update_always": true,
+    "update_icons": true,
+    "update_keystores": true,
+    "version": "1.0"
+}
