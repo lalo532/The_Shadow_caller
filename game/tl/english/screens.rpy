@@ -1,4 +1,4 @@
-﻿# TODO: Translation updated at 2026-04-14 11:22
+﻿# TODO: Translation updated at 2026-04-16 20:34
 
 translate english strings:
 
@@ -32,7 +32,7 @@ translate english strings:
 
     # game/screens.rpy:256
     old "Prefs."
-    new "Prefs"
+    new "Prefs."
 
     # game/screens.rpy:302
     old "Comenzar"
@@ -80,7 +80,7 @@ translate english strings:
 
     # game/screens.rpy:605
     old "Grabación automática"
-    new "Auto saves"
+    new "Automatic saves"
 
     # game/screens.rpy:605
     old "Grabación rápida"
@@ -118,221 +118,218 @@ translate english strings:
     old "Descargar Sync"
     new "Download Sync"
 
-    # game/screens.rpy:750
+    # game/screens.rpy:745
+    old "Idioma / Language"
+    new "Language"
+
+    # game/screens.rpy:756
     old "Pantalla"
     new "Display"
 
-    # game/screens.rpy:751
+    # game/screens.rpy:757
     old "Ventana"
     new "Window"
 
-    # game/screens.rpy:752
+    # game/screens.rpy:758
     old "Pantalla completa"
     new "Fullscreen"
 
-    # game/screens.rpy:757
+    # game/screens.rpy:763
     old "Texto no visto"
     new "Unseen Text"
 
-    # game/screens.rpy:758
+    # game/screens.rpy:764
     old "Tras elecciones"
     new "After Choices"
 
-    # game/screens.rpy:759
+    # game/screens.rpy:765
     old "Transiciones"
     new "Transitions"
 
-    # game/screens.rpy:772
+    # game/screens.rpy:778
     old "Veloc. texto"
     new "Text Speed"
 
-    # game/screens.rpy:776
+    # game/screens.rpy:782
     old "Veloc. autoavance"
     new "Auto-Forward Time"
 
-    # game/screens.rpy:783
+    # game/screens.rpy:789
     old "Volumen música"
     new "Music Volume"
 
-    # game/screens.rpy:790
+    # game/screens.rpy:796
     old "Volumen sonido"
     new "Sound Volume"
 
-    # game/screens.rpy:796
+    # game/screens.rpy:802
     old "Prueba"
     new "Test"
 
-    # game/screens.rpy:800
+    # game/screens.rpy:806
     old "Volumen voz"
     new "Voice Volume"
 
-    # game/screens.rpy:811
+    # game/screens.rpy:817
     old "Silenciar todo"
     new "Mute All"
 
-    # game/screens.rpy:930
+    # game/screens.rpy:936
     old "El historial está vacío."
-    new "The dialog history is empty."
+    new "The history is empty."
 
-    # game/screens.rpy:998
+    # game/screens.rpy:1004
     old "Teclado"
     new "Keyboard"
 
-    # game/screens.rpy:999
+    # game/screens.rpy:1005
     old "Ratón"
     new "Mouse"
 
-    # game/screens.rpy:1002
+    # game/screens.rpy:1008
     old "Mando"
     new "Gamepad"
 
-    # game/screens.rpy:1015
+    # game/screens.rpy:1021
     old "Intro"
     new "Enter"
 
-    # game/screens.rpy:1016
+    # game/screens.rpy:1022
     old "Avanza el diálogo y activa la interfaz."
-    new "Advances dialog and activates the interface."
+    new "Advances dialogue and activates the interface."
 
-    # game/screens.rpy:1019
+    # game/screens.rpy:1025
     old "Espacio"
     new "Space"
 
-    # game/screens.rpy:1020
+    # game/screens.rpy:1026
     old "Avanza el diálogo sin seleccionar opciones."
-    new "Advances dialog without selecting choices."
+    new "Advances dialogue without selecting choices."
 
-    # game/screens.rpy:1023
+    # game/screens.rpy:1029
     old "Teclas de flecha"
     new "Arrow Keys"
 
-    # game/screens.rpy:1024
+    # game/screens.rpy:1030
     old "Navega la interfaz."
-    new "Navigates the interface."
+    new "Navigate the interface."
 
-    # game/screens.rpy:1027
+    # game/screens.rpy:1033
     old "Escape"
     new "Escape"
 
-    # game/screens.rpy:1028
+    # game/screens.rpy:1034
     old "Accede al menú del juego."
     new "Accesses the game menu."
 
-    # game/screens.rpy:1031
+    # game/screens.rpy:1037
     old "Ctrl"
     new "Ctrl"
 
-    # game/screens.rpy:1032
+    # game/screens.rpy:1038
     old "Salta el diálogo mientras se presiona."
-    new "Skips dialog while held down."
+    new "Skips dialogue while held down."
 
-    # game/screens.rpy:1035
+    # game/screens.rpy:1041
     old "Tabulador"
     new "Tab"
 
-    # game/screens.rpy:1036
+    # game/screens.rpy:1042
     old "Activa/desactiva el salto de diálogo."
-    new "Toggles dialog skipping."
+    new "Toggles dialogue skipping."
 
-    # game/screens.rpy:1039
+    # game/screens.rpy:1045
     old "Av. pág."
     new "Page Up"
 
-    # game/screens.rpy:1040
+    # game/screens.rpy:1046
     old "Retrocede al diálogo anterior."
-    new "Rolls back to earlier dialog."
+    new "Rolls back to earlier dialogue."
 
-    # game/screens.rpy:1043
+    # game/screens.rpy:1049
     old "Re. pág."
     new "Page Down"
 
-    # game/screens.rpy:1044
+    # game/screens.rpy:1050
     old "Avanza hacia el diálogo siguiente."
-    new "Rolls forward to later dialog."
+    new "Rolls forward to later dialogue."
 
-    # game/screens.rpy:1048
+    # game/screens.rpy:1054
     old "Oculta la interfaz."
     new "Hides the user interface."
 
-    # game/screens.rpy:1052
+    # game/screens.rpy:1058
     old "Captura la pantalla."
     new "Takes a screenshot."
 
-    # game/screens.rpy:1056
+    # game/screens.rpy:1062
     old "Activa/desactiva la asistencia por {a=https://www.renpy.org/l/voicing}voz-automática{/a}."
     new "Toggles assistive {a=https://www.renpy.org/l/voicing}self-voicing{/a}."
 
-    # game/screens.rpy:1060
+    # game/screens.rpy:1066
     old "Abre el menú de accesibilidad."
     new "Opens the accessibility menu."
 
-    # game/screens.rpy:1066
+    # game/screens.rpy:1072
     old "Clic izquierdo"
     new "Left Click"
 
-    # game/screens.rpy:1070
+    # game/screens.rpy:1076
     old "Clic medio"
     new "Middle Click"
 
-    # game/screens.rpy:1074
+    # game/screens.rpy:1080
     old "Clic derecho"
     new "Right Click"
 
-    # game/screens.rpy:1078
+    # game/screens.rpy:1084
     old "Rueda del ratón arriba"
     new "Mouse Wheel Up"
 
-    # game/screens.rpy:1082
+    # game/screens.rpy:1088
     old "Rueda del ratón abajo"
     new "Mouse Wheel Down"
 
-    # game/screens.rpy:1089
+    # game/screens.rpy:1095
     old "Gatillo derecho\nA/Botón inferior"
     new "Right Trigger\nA/Bottom Button"
 
-    # game/screens.rpy:1093
+    # game/screens.rpy:1099
     old "Gatillo izquierdo\nBotón sup. frontal izq."
     new "Left Trigger\nLeft Shoulder"
 
-    # game/screens.rpy:1097
+    # game/screens.rpy:1103
     old "Botón sup. frontal der."
     new "Right Shoulder"
 
-    # game/screens.rpy:1101
+    # game/screens.rpy:1107
     old "D-Pad, Sticks"
     new "D-Pad, Sticks"
 
-    # game/screens.rpy:1105
+    # game/screens.rpy:1111
     old "Inicio, Guía, B/Botón Derecho"
     new "Start, Guide, B/Right Button"
 
-    # game/screens.rpy:1109
+    # game/screens.rpy:1115
     old "Y/Botón superior"
     new "Y/Top Button"
 
-    # game/screens.rpy:1112
+    # game/screens.rpy:1118
     old "Calibrar"
     new "Calibrate"
 
-    # game/screens.rpy:1178
+    # game/screens.rpy:1184
     old "Sí"
     new "Yes"
 
-    # game/screens.rpy:1179
+    # game/screens.rpy:1185
     old "No"
     new "No"
 
-    # game/screens.rpy:1225
+    # game/screens.rpy:1231
     old "Saltando"
     new "Skipping"
 
-    # game/screens.rpy:1539
+    # game/screens.rpy:1545
     old "Menú"
-    new "Menu"# TODO: Translation updated at 2026-04-14 11:46
-
-translate english strings:
-
-    # game/screens.rpy:745
-    old "Idioma / Language"
-    new ""
-
+    new "Menu"

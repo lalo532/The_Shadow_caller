@@ -96,19 +96,25 @@ style frame:
 ## https://www.renpy.org/doc/html/screen_special.html#say
 
 screen say(who, what):
+    style_prefix "say"
 
     window:
         id "window"
+        background Transform("gui/textbox.png", alpha=persistent.dialogue_box_alpha)
+
+        # Si quieres mantener bordes redondeados o estilo, puedes usar Frame:
+        # background Transform(Frame("gui/textbox.png", gui.textbox_borders), alpha=persistent.dialogue_box_alpha)
+
+        xalign 0.5
+        yalign 1.0
 
         if who is not None:
-
             window:
                 id "namebox"
                 style "namebox"
                 text who id "who"
 
         text what id "what"
-
 
     ## Si hay una imagen lateral, la muestra encima del texto. No la muestra en
     ## la variante de teléfono - no hay lugar.

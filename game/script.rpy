@@ -155,7 +155,7 @@ label menu_planta_alta:
 # AVANZAR TIEMPO (Slow-burn)
 # ==========================================
 label avanzar_tiempo:
-    $ tension_casa += 12
+    $ tension_casa += 0.5
 
     if momento_dia == "Mañana":
         $ momento_dia = "Tarde"

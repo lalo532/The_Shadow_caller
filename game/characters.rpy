@@ -8,5 +8,8 @@ define roxy = Character("[roxy_name]", color="#FF66B2")
 define roxane = Character("[h_mayor_name]", color="#8A2BE2")
 define kiry = Character("[h_menor_name]", color="#FFFF33")
 
-define narrador = Character(None, kind=nvl)
-define n = Character(None, kind=nvl)  # alias corto
+# Narrador: Sin nombre, solo texto (como pediste)
+# Narrador sin nombre, texto en gris claro
+define narrador = Character(None, 
+    what_color="#c01010", 
+    what_italic=True)
