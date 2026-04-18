@@ -1,7 +1,6 @@
 ﻿# ==========================================
-# MADRE NOCHE - script.rpy (Versión FINAL limpia)
-# Solo contiene inicio, configuración y HUB.
-# Los eventos están en game/events/
+# MADRE NOCHE - script.rpy (Versión FINAL mejorada)
+# Inicio, configuración, backstory orgánico y HUB
 # ==========================================
 
 # ==========================================
@@ -39,6 +38,7 @@ label establecer_familia:
             $ roxy_rol = "hermana"
             $ roxane_rol = "hermana mayor"
             $ kiry_rol = "hermana menor"
+            $ mc_rol = "hermano"
             narrador "Vives con tu [madre_rol] y tus hermanas."
 
         "Prima (Viven con su tía)":
@@ -46,6 +46,7 @@ label establecer_familia:
             $ roxy_rol = "prima"
             $ roxane_rol = "prima mayor"
             $ kiry_rol = "prima menor"
+            $ mc_rol = "primo"
             narrador "Vives con tu [madre_rol] y tus primas."
 
         "Tía joven (Vives con tu abuela)":
@@ -53,6 +54,7 @@ label establecer_familia:
             $ roxy_rol = "tía"
             $ roxane_rol = "tía mayor"
             $ kiry_rol = "tía menor"
+            $ mc_rol = "sobrino"
             narrador "Vives con tu [madre_rol] y tus tías jóvenes."
 
     jump finalizar_configuracion
@@ -64,6 +66,7 @@ label establecer_inquilinos:
     $ roxy_rol = "compañera"
     $ roxane_rol = "compañera de piso"
     $ kiry_rol = "compañera de cuarto"
+    $ mc_rol = "inquilino"
     
     narrador "Vives alquilado con tu [madre_rol] y tus [kiry_rol]s."
 
@@ -78,28 +81,49 @@ label finalizar_configuracion:
             $ contenido_gay_activado = True
             show Roxy_muestra1 at fullscreen with flash
             roxy "Muchas gracias por aceptar este contenido."
-            pause 2.0
+            pause 1.5
             hide Roxy_muestra1 with dissolve
 
         "No, omitir.":
             $ contenido_gay_activado = False
             show Roxy_muestra2 at fullscreen with flash
             roxy "Una pena... nos lo perdemos, [mc_name]."
-            pause 2.0
+            pause 1.5
             hide Roxy_muestra2 with dissolve
 
     scene fondo_casa with dissolve
 
-    narrador "La nieve cubre todo. Llevamos días sin poder salir. Tienen suerte de tener calefacción y luz gubernamental."
-    narrador "La radio dijo que esto podría durar meses. Por suerte, hay mucha comida enlatada abajo."
-
-    mc "Tres meses encerrados... esto se va a volver una locura."
+    # ==========================================
+    # INTRODUCCIÓN + BACKSTORY ORGÁNICO (usando sprites)
+    # ==========================================
+    narrador "La nieve lleva semanas cayendo sin parar. La casa está completamente aislada del mundo exterior."
+    narrador "Llevan más de un mes encerrados aquí. La calefacción funciona, pero la tensión crece día a día."
 
     show Madre at right, zoom_sprite with easeinright
-    madre "Tranquilo, [mc_name]. Todo va a estar bien mientras no nos matemos entre nosotros."
-    madre "Voy a organizar la comida. Busca algo que hacer."
+    madre "Tranquilo, [mc_name]. Todo va a estar bien mientras nos mantengamos unidos."
+    madre "Aunque... a veces siento que este encierro está sacando cosas que llevábamos años guardando."
 
     hide Madre with dissolve
+    show Roxane at left, zoom_sprite with easeinleft
+    roxane "No seas dramática, [madre_rol]. Solo es nieve. Sobreviviremos."
+    roxane "Aunque admito que estar tanto tiempo encerrada con la misma gente... termina por cambiar la forma en que los ves."
+
+    hide Roxane with dissolve
+    show Roxy at right, zoom_sprite with easeinright
+    roxy "Yo solo quiero que alguien me mire como a una chica de verdad... no como 'la rarita de la casa'."
+    roxy "Especialmente tú, [mc_name]. Siempre fuiste el único que no me trató con lástima."
+
+    hide Roxy with dissolve
+    show Kiri at left, zoom_sprite with easeinleft
+    kiry "¡Yo solo quiero que alguien me preste atención! Me aburro muchísimo aquí..."
+    kiry "Y tú siempre me has cuidado, [mc_name]. Eres como mi héroe desde que era niña."
+
+    hide Kiri with dissolve
+
+    mc "(Pensando) Llevo años siendo el único hombre fuerte en esta casa. Papá nunca estuvo cuando lo necesitábamos..."
+    mc "(Pensando) Madre se ha marchitado al lado de un hombre débil. Roxane reprime todo. Roxy busca validación desesperadamente. Kiry aún me ve como su protector..."
+    mc "(Pensando) Este encierro va a terminar por explotar. Y temo que cuando lo haga... ya no habrá vuelta atrás."
+
     show screen hud_tiempo
     jump hub_principal
 
@@ -108,7 +132,7 @@ label finalizar_configuracion:
 # ==========================================
 label hub_principal:
     scene fondo_casa with dissolve
-    narrador "Estás en el pasillo principal de la planta baja."
+    narrador "Estás en el pasillo principal de la planta baja. La tensión en el aire es cada vez más palpable."
 
     menu:
         "¿A dónde quieres ir?"
@@ -155,7 +179,7 @@ label menu_planta_alta:
 # AVANZAR TIEMPO (Slow-burn)
 # ==========================================
 label avanzar_tiempo:
-    $ tension_casa += 0.5
+    $ tension_casa += 12   # Aumenta la tensión general para desbloquear eventos
 
     if momento_dia == "Mañana":
         $ momento_dia = "Tarde"
@@ -165,6 +189,7 @@ label avanzar_tiempo:
         $ momento_dia = "Mañana"
         $ dia += 1
 
+        # Reset de eventos diarios
         $ evento_madre_cocina_visto = False
         $ evento_roxy_bano_visto = False
         $ evento_playcartas_visto = False
@@ -175,6 +200,6 @@ label avanzar_tiempo:
     narrador "Unas horas más tarde..."
 
     if dia == 2 and momento_dia == "Mañana":
-        jump evento_kiry_cama
+        jump evento_kiry_cama   # Evento especial día 2
 
     jump hub_principal
