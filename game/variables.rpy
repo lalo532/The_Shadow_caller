@@ -13,7 +13,7 @@ default madre_rol = "madre"
 default roxy_rol = "hermana"
 default roxane_rol = "hermana mayor"
 default kiry_rol = "hermana menor"
-
+default mc_rol ="hermano"
 default tipo_relacion = "familia"
 
 # === NUEVO SISTEMA DE TENSIÓN (slow-burn) ===
