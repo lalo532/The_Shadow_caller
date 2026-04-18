@@ -81,42 +81,6 @@ label evento_madrexroxy:
 # ==========================================
 # EVENTO: Cocina con la Madre (Mañana) - Más tensión y opciones
 # ==========================================
-label loc_cocina:
-    scene fondo_casa
-    if momento_dia == "Mañana" and not evento_madre_cocina_visto:
-        $ evento_madre_cocina_visto = True
-        narrador "[madre_name] está sacando unas latas de los estantes inferiores."
-        show madre_cocina1 at fullscreen with flash
-        narrador "Tu [madre_rol] lleva un vestido de tirantes rojos. Sin darse cuenta, la tela se ha subido, exponiendo sus muslos y su trasero generoso."
-        mc "Mierda... menuda vista."
-        show madre_cocina2 at fullscreen with flash
-
-        menu:
-            "Quedarte mirando descaradamente sin disimular":
-                $ tension_madre += 6
-                narrador "No intentas disimular. Ella se da cuenta al voltear y te sostiene la mirada por varios segundos."
-                show madre_cocina3 at fullscreen with flash
-                madre "¿Te gusta lo que ves, [mc_name]?"
-                mc "Si te pones así, es imposible mirar a otro lado. Ese culo me tiene la verga palpitando."
-                madre "Eres un descarado... pero me gusta que prestes atención. Hace mucho que nadie me mira como tú lo haces."
-                show madre_cocina4 at fullscreen with flash
-                madre "Ven aquí y ayúdame... o quédate mirando. No sé qué me excita más."
-
-            "Ofrecerle ayuda de forma considerada":
-                $ amor_madre += 4
-                mc "Déjame ayudarte con eso antes de que te caigas."
-                show madre_cocina5 at fullscreen with flash
-                madre "Gracias, [mc_name]. Qué considerado eres... siempre lo has sido. A veces me pregunto qué habría sido de mí sin ti."
-
-            "Ignorarla y servirte café fríamente":
-                $ odio_madre += 2
-                narrador "Pasas de largo sin decir nada. Ella se acomoda el vestido rápidamente, visiblemente decepcionada y dolida por tu indiferencia."
-                madre "(en voz baja) ...Siempre tan frío conmigo últimamente."
-    else:
-        narrador "No hay nadie en la cocina. El fregadero está limpio."
-    jump hub_principal
-
-# ==========================================
 # EVENTO NOCHE MADRE - Versión Extensa y Orgánica (Usando TODAS las imágenes)
 # ==========================================
 label evento_noche_madre:

@@ -41,3 +41,7 @@ default evento_madre_noche_visto = False
 
 default contenido_gay_activado = False
 default odio_madre = 0
+
+
+default evento_roxane_sala_visto = False
+default evento_cocina_roxane_visto = False
