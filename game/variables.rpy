@@ -13,7 +13,7 @@ default madre_rol = "madre"
 default roxy_rol = "hermana"
 default roxane_rol = "hermana mayor"
 default kiry_rol = "hermana menor"
-
+default mc_rol ="hermano"
 default tipo_relacion = "familia"
 
 # === NUEVO SISTEMA DE TENSIÓN (slow-burn) ===
@@ -41,3 +41,7 @@ default evento_madre_noche_visto = False
 
 default contenido_gay_activado = False
 default odio_madre = 0
+
+
+default evento_roxane_sala_visto = False
+default evento_cocina_roxane_visto = False
